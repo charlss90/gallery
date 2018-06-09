@@ -1,0 +1,7 @@
+[*.*]
+end_of_line = crlf
+charset = utf-8
+
+[*.{js,ts,json,jsx,tsx}]
+indent_size = 2
+indent_style = space

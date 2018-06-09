@@ -1,0 +1,10 @@
+export { IFlickrFilter } from "./IFlickrFilter";
+export { IFlickrPaginationResponse } from "./IFlickrPaginationResponse";
+export { IFlickrPhoto } from "./IFlickrPhoto";
+export { IFlickrPhotoDescription } from "./IFlickrPhotoDescription";
+export { IFlickrResponse } from "./IFlickrResponse";
+export { IPagination } from "./IPagination";
+export { IPhoto } from "./IPhoto";
+export { IPhotoFeatures } from "./IPhotoFeatures";
+export { IPhotoPagination } from "./IPhotoPagination";
+export { IRequest } from "./IRequest";

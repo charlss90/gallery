@@ -1,0 +1,41 @@
+import { IFlickrPhotoDescription } from "./IFlickrPhotoDescription";
+
+export interface IFlickrPhoto {
+  id: string;
+  owner: string;
+  secret: string;
+  farm: number;
+  title: string;
+  ispublic: 1 | 0;
+  isfriend: 1 | 0;
+  isfamily: 1 | 0;
+  description: IFlickrPhotoDescription;
+  rotation: number;
+  url_c: string;
+  height_c: string;
+  width_c: string;
+  url_l: string;
+  height_l: string;
+  width_l: string;
+  url_m: string;
+  height_m: string;
+  width_m: string;
+  url_n: string;
+  height_n: string;
+  width_n: string;
+  url_q: string;
+  height_q: string;
+  width_q: string;
+  url_s: string;
+  height_s: string;
+  width_s: string;
+  url_sq: string;
+  height_sq: string;
+  width_sq: string;
+  url_t: string;
+  height_t: string;
+  width_t: string;
+  url_z: string;
+  height_z: string;
+  width_z: string;
+}
