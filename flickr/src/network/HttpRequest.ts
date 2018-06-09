@@ -1,4 +1,4 @@
-import { IRequest } from "contracts";
+import { IRequest } from "@src/contracts";
 import { CoreOptions, get, Response } from "request";
 import { HttpStatusCode } from "./HttpStatusCode";
 import { HttpError } from ".";
@@ -7,7 +7,7 @@ export class HttpRequest implements IRequest {
 
   getAsync<T>(uri: string, options: CoreOptions): Promise<T> {
     return new Promise((resolve, reject) => {
-      get(uri, options, (error, response, body) => {
+      get(uri, { ...options, json: true }, (error, response, body) => {
         try {
           this.assertResponse(error, response, body);
           resolve(body);

@@ -6,7 +6,8 @@ import {
   IFlickrFilter,
   IPhoto,
   IPhotoFeatures,
-} from "contracts";
+  IFlickrResponse,
+} from "@src/contracts";
 
 export class FlickrService {
 
@@ -16,14 +17,16 @@ export class FlickrService {
   }
 
   async getAllImagesAsync(filter: IPagination): Promise<IPhotoPagination> {
-    const response = await this.request.getAsync<IFlickrPaginationResponse>(this.baseURL, {
+    const response = await this.request.getAsync<IFlickrResponse>(this.baseURL, {
       qs: this.createFlickrFilter(filter),
     });
 
+    const photos = this.assertOrGetPhotos(response);
+
     return {
-      total: response.total,
-      totalPages: response.pages,
-      photos: response.photo.filter(x => !!x).map(x => ({
+      total: photos.total,
+      totalPages: photos.pages,
+      photos: photos.photo.filter(x => !!x).map(x => ({
         description: (x.description && x.description).__content || "",
         id: x.id,
         urls: {
@@ -59,5 +62,17 @@ export class FlickrService {
       width: parseInt(width, undefined) || 0,
       height: parseInt(height, undefined) || 0,
     };
+  }
+
+  private assertOrGetPhotos(response: IFlickrResponse):IFlickrPaginationResponse {
+    let photos: IFlickrPaginationResponse | undefined;
+    if (response.stat !== "ok") {
+      throw new Error(response.message || "Unexpected Error");
+    }
+    photos = response.photos;
+    if (!photos) {
+      throw new Error("Expected photos into api response");
+    }
+    return photos;
   }
 }
