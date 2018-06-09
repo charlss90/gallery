@@ -29,7 +29,7 @@ export class FlickrService {
         urls: {
           large: this.toPhotoFeatures(x.url_l, x.width_l, x.height_l),
           medium: this.toPhotoFeatures(x.url_m, x.width_m, x.height_m),
-          small: this.toPhotoFeatures(x.url_s, x.width_s, x.height_s)
+          small: this.toPhotoFeatures(x.url_s, x.width_s, x.height_s),
         },
       })),
     };
