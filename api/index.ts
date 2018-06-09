@@ -1,7 +1,8 @@
-import { FlickrService, HttpRequest } from "@flickr";
+import { FlickrService } from "@flickr";
 import { PhotosRouter } from "@api/routes";
 import { ApiFactory } from "@api";
 import { Router } from "express";
+import { HttpRequest } from "@common";
 
 export { ApiFactory } from "@api/factories";
 export { PhotosRouter } from "@api/routes";

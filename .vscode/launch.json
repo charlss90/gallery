@@ -18,7 +18,8 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/dist/__tests__/**/*.js"
+                "${workspaceFolder}/dist/__tests__/**/*.js",
+                "${workspaceFolder}/dist/flickr/__tests__/**/*.js"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         }

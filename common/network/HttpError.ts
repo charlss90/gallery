@@ -12,7 +12,7 @@ export class HttpError extends Error {
 
   constructor(
     error: string,
-    private readonly httpReponse: Response) {
+    private readonly httpReponse: Response | any) {
     super(error);
   }
 }

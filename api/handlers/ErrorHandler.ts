@@ -1,5 +1,5 @@
 import { Express, Request, Response, NextFunction } from "express";
-import { HttpStatusCode } from "@flickr/";
+import { HttpStatusCode, ArgumentError } from "@common";
 import { BadRequest } from "@api/errors";
 
 export interface ErrorResponse {
@@ -17,7 +17,7 @@ export const errorHandler = async (err: any, req: Request, res: Response, next: 
   try {
     response.message = err.message;
     response.stack = err.stack;
-    if (err instanceof BadRequest) {
+    if (err instanceof BadRequest || err instanceof ArgumentError) {
       response.code = HttpStatusCode.BadRequest;
     }
   } catch (ex) {

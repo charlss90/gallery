@@ -1,19 +1,23 @@
 import {
-  IRequest,
   IFlickrPaginationResponse,
   IFlickrFilter,
   IFlickrResponse,
 } from "@flickr/contracts";
 import { IPagination, IPhotoPagination, IPhotoFeatures } from "@photos";
+import { IRequest, ArgumentError } from "@common";
 
 export class FlickrService {
 
   private readonly baseURL: string = "https://api.flickr.com/services/rest";
 
   constructor(private apiKey: string, private request: IRequest) {
+    if (apiKey.length === 0) {
+      throw new Error("Unexpected apiKey, please specifiy");
+    }
   }
 
   async getAllImagesAsync(filter: IPagination): Promise<IPhotoPagination> {
+    this.assertFilter(filter);
     const response = await this.request.getAsync<IFlickrResponse>(this.baseURL, {
       qs: this.createFlickrFilter(filter),
     });
@@ -21,11 +25,11 @@ export class FlickrService {
     const photos = this.assertOrGetPhotos(response);
 
     return {
-      total: photos.total,
-      totalPages: photos.pages,
-      photos: photos.photo.filter(x => !!x).map(x => ({
+      total: photos.total || "0",
+      totalPages: photos.pages || 0,
+      photos: (photos.photo || []).filter(x => !!x).map(x => ({
         description: (x.description && x.description).__content || "",
-        id: x.id,
+        id: x.id || "",
         urls: {
           large: this.toPhotoFeatures(x.url_l, x.width_l, x.height_l),
           medium: this.toPhotoFeatures(x.url_m, x.width_m, x.height_m),
@@ -33,6 +37,15 @@ export class FlickrService {
         },
       })),
     };
+  }
+
+  private assertFilter(filter: IPagination) {
+    if (!filter.page || filter.page <= 0) {
+      throw new ArgumentError("Unexpected Argument: page must be bigger than 0");
+    }
+    if (!filter.itemsPerPage || filter.itemsPerPage <= 0) {
+      throw new ArgumentError("Unexpected Argument: itemsPerPage must be bigger than 0");
+    }
   }
 
   private createFlickrFilter(filter: IPagination): IFlickrFilter {
@@ -61,14 +74,17 @@ export class FlickrService {
     };
   }
 
-  private assertOrGetPhotos(response: IFlickrResponse):IFlickrPaginationResponse {
+  private assertOrGetPhotos(response: IFlickrResponse): IFlickrPaginationResponse {
     let photos: IFlickrPaginationResponse | undefined;
+    if (!response) {
+      throw new Error("Unexpected error: response is missing");
+    }
     if (response.stat !== "ok") {
-      throw new Error(response.message || "Unexpected Error");
+      throw new Error(response.message || "Unexpected error: provider fails");
     }
     photos = response.photos;
     if (!photos) {
-      throw new Error("Expected photos into api response");
+      throw new Error("Unexpected error: provider return empty photos");
     }
     return photos;
   }

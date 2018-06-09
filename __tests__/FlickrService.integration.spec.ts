@@ -1,10 +1,7 @@
 import { expect } from "chai";
-import {
-  FlickrService,
-  HttpError,
-  HttpRequest,
-} from "@flickr/";
+import { FlickrService } from "@flickr";
 import { IPagination } from "@photos";
+import { HttpRequest } from "@common";
 
 describe("FlickService getAllImagesAsync", () => {
   let flickrService: FlickrService;

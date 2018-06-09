@@ -5,7 +5,7 @@ import chai, { expect } from "chai";
 import chaiHttp from "chai-http";
 import { IPhotoPagination } from "@photos";
 import { ErrorResponse } from "@api/handlers";
-import { HttpStatusCode } from "@flickr";
+import { HttpStatusCode } from "@common";
 
 chai.use(chaiHttp);
 

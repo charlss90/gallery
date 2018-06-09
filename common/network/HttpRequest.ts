@@ -1,6 +1,6 @@
-import { IRequest } from "@flickr/contracts";
+import { IRequest } from "@common/contracts";
 import { CoreOptions, get, Response } from "request";
-import { HttpError, HttpStatusCode } from "@flickr/network";
+import { HttpError, HttpStatusCode } from "@common/network";
 
 export class HttpRequest implements IRequest {
 
