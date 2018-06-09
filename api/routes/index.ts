@@ -1,0 +1,1 @@
+export { PhotosRouter } from "./PhotoRouter";

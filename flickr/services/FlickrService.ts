@@ -1,13 +1,10 @@
 import {
   IRequest,
-  IPagination,
-  IPhotoPagination,
   IFlickrPaginationResponse,
   IFlickrFilter,
-  IPhoto,
-  IPhotoFeatures,
   IFlickrResponse,
 } from "@flickr/contracts";
+import { IPagination, IPhotoPagination, IPhotoFeatures } from "@photos";
 
 export class FlickrService {
 
