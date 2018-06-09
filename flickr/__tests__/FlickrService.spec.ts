@@ -3,11 +3,11 @@ import { FlickrService } from "@flickr";
 import { mock } from "sinon";
 import { IPagination } from "@photos";
 import { ArgumentError, HttpRequest, HttpError } from "@common";
-import { EPERM } from "constants";
+import request from "request";
 
-describe("FlickrService Unit Test", () => {
+describe("[Unit Test] FlickrService: getAllImagesAsync", () => {
   let photoService: FlickrService;
-  const httpRequest = new HttpRequest();
+  const httpRequest = new HttpRequest(request);
   const requestMock = mock(httpRequest);
   const apiKey = "any";
   const validFilter: IPagination = { itemsPerPage: 1, page: 1 };

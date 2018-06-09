@@ -19,7 +19,8 @@
                 "999999",
                 "--colors",
                 "${workspaceFolder}/dist/__tests__/**/*.js",
-                "${workspaceFolder}/dist/flickr/__tests__/**/*.js"
+                "${workspaceFolder}/dist/flickr/__tests__/**/*.js",
+                "${workspaceFolder}/dist/common/__tests__/**/*.js"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         }

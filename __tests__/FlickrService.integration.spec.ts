@@ -2,13 +2,14 @@ import { expect } from "chai";
 import { FlickrService } from "@flickr";
 import { IPagination } from "@photos";
 import { HttpRequest } from "@common";
+import request from "request";
 
-describe("FlickService getAllImagesAsync", () => {
+describe("[Integration] FlickService: getAllImagesAsync", () => {
   let flickrService: FlickrService;
   const apiKey: string = "59e9561e02d8a39f946bc73f01d4d6d1";
 
   before(() => {
-    flickrService = new FlickrService(apiKey, new HttpRequest());
+    flickrService = new FlickrService(apiKey, new HttpRequest(request));
   });
 
   it("get photos when try get images given a page 1 and 20 per page", async () => {

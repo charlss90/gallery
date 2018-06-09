@@ -1,12 +1,19 @@
 import { IRequest } from "@common/contracts";
-import { CoreOptions, get, Response } from "request";
+import { CoreOptions, Response, RequestAPI, RequiredUriUrl, Request } from "request";
 import { HttpError, HttpStatusCode } from "@common/network";
+import { ArgumentError } from "@common";
 
 export class HttpRequest implements IRequest {
 
-  getAsync<T>(uri: string, options: CoreOptions): Promise<T> {
+  constructor(
+    private readonly request: RequestAPI<Request, CoreOptions, RequiredUriUrl>) {
+  }
+
+  getAsync<T>(uri: string, options: CoreOptions = {}): Promise<T> {
     return new Promise((resolve, reject) => {
-      get(uri, { ...options, json: true }, (error, response, body) => {
+      this.assertUri(uri);
+
+      this.request.get(uri, { ...options, json: true }, (error, response, body) => {
         try {
           this.assertResponse(error, response, body);
           resolve(body);
@@ -15,6 +22,12 @@ export class HttpRequest implements IRequest {
         }
       });
     });
+  }
+
+  private assertUri(uri: string) {
+    if (!uri || uri.length === 0) {
+      throw new ArgumentError("Unexpected Argument: uri cannot be empty");
+    }
   }
 
   private assertResponse(error: any, response: Response, body: any) {

@@ -9,7 +9,7 @@ import { HttpStatusCode } from "@common";
 
 chai.use(chaiHttp);
 
-describe("Api: /GET photos", () => {
+describe("[Integration] Api: /GET photos", () => {
   const endPoint = "http://localhost:4000";
   const apiKey: string = "59e9561e02d8a39f946bc73f01d4d6d1";
   let app: Express;
