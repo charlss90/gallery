@@ -7,7 +7,7 @@ import {
   IPhoto,
   IPhotoFeatures,
   IFlickrResponse,
-} from "@src/contracts";
+} from "@flickr/contracts";
 
 export class FlickrService {
 

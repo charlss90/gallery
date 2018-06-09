@@ -1,7 +1,11 @@
 import { expect } from "chai";
-import { FlickrService } from "@src/services";
-import { HttpRequest } from "@src/network";
-import { IPagination, IPhotoPagination } from "@src/contracts";
+import {
+  FlickrService,
+  HttpError,
+  IPagination,
+  IPhotoPagination,
+  HttpRequest,
+} from "@flickr/";
 
 describe("FlickService getAllImagesAsync", () => {
   let flickrService: FlickrService;
@@ -24,5 +28,17 @@ describe("FlickService getAllImagesAsync", () => {
     expect(photoPagination.totalPages).greaterThan(0);
     expect(photoPagination.photos).not.to.be.undefined;
     expect(photoPagination.photos.length).to.be.equal(20);
+    photoPagination.photos.forEach((photo) => {
+      expect(photo).not.to.be.undefined;
+      expect(photo.id).not.to.be.undefined;
+      expect(photo.id.length).greaterThan(0);
+      expect(photo.urls).not.to.be.undefined;
+      expect(photo.urls.large).not.to.be.undefined;
+      expect(photo.urls.large.url).not.to.be.undefined;
+      expect(photo.urls.medium).not.to.be.undefined;
+      expect(photo.urls.medium.url).not.to.be.undefined;
+      expect(photo.urls.small).not.to.be.undefined;
+      expect(photo.urls.small.url).not.to.be.undefined;
+    });
   });
 });

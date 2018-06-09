@@ -8,9 +8,8 @@
             "type": "node",
             "request": "launch",
             "name": "Flickr Tests",
-            "program": "${workspaceFolder}/flickr/node_modules/mocha/bin/_mocha",
+            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
             "preLaunchTask": "build-flickr",
-            "cwd": "${workspaceFolder}/flickr",
             "args": [
                 "-r",
                 "module-alias/register",
@@ -19,7 +18,7 @@
                 "--timeout",
                 "999999",
                 "--colors",
-                "${workspaceFolder}/flickr/lib/__tests__/**/*.js"
+                "${workspaceFolder}/dist/__tests__/**/*.js"
             ],
             "internalConsoleOptions": "openOnSessionStart"
         }

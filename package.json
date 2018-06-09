@@ -7,7 +7,7 @@
     "test": "mocha ./lib/__tests__/**/*.js -r module-alias/register"
   },
   "_moduleAliases": {
-    "@src": "./lib"
+    "@flickr": "./dist/flickr"
   },
   "keywords": [],
   "author": "",

@@ -7,7 +7,7 @@
             "identifier": "build-flickr",
             "label": "build-flickr",
             "type": "typescript",
-            "tsconfig": "flickr\\tsconfig.json",
+            "tsconfig": "tsconfig.json",
             "problemMatcher": [
                 "$tsc"
             ],
