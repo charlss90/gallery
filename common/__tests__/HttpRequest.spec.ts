@@ -1,6 +1,6 @@
-import { HttpRequest, ArgumentError } from "@common";
-import { mock, SinonMock, match } from "sinon";
-import request from "request";
+import { HttpRequest, ArgumentError, HttpError, HttpStatusCode } from "@common";
+import { mock, SinonMock, match, stub, SinonStub, SinonStubbedInstance } from "sinon";
+import request, { RequestAPI, Request, CoreOptions, RequiredUriUrl } from "request";
 import { expect } from "chai";
 
 describe("[Unit Test] HttpRequest: getAsync", () => {
@@ -8,6 +8,7 @@ describe("[Unit Test] HttpRequest: getAsync", () => {
   let requestMock: SinonMock;
   const invalidUrl = "invalidUrl";
   const validUrl = "http://my.lock";
+  const anyError = new Error("Any error");
 
   beforeEach(() => {
     requestMock = mock(request);
@@ -54,10 +55,9 @@ describe("[Unit Test] HttpRequest: getAsync", () => {
 
   it("throw Error when try getAsync given a invalid url", (done) => {
     // Arrange
-    const error = new Error("Any error");
-    // requestMock.expects("get")
-    //   .withArgs(validUrl, match.any)
-    //   .callArgWith(1, error, null, null);
+    requestMock.expects("get").callsFake((uri, options, callback) => {
+      callback(anyError, null, null);
+    });
 
     // Act
     httpRequest.getAsync(validUrl)
@@ -72,5 +72,44 @@ describe("[Unit Test] HttpRequest: getAsync", () => {
           done(ex);
         }
       });
+
+  });
+
+  it("throw HttpError with status 400 when try getAsync given a invalid url", (done) => {
+    // Arrange
+    requestMock.expects("get").callsFake((uri, options, callback) => {
+      callback(null, { statusCode: HttpStatusCode.InternalError }, null);
+    });
+
+    // Act
+    httpRequest.getAsync(validUrl)
+      // Assert
+      .then((response) => {
+        done(new Error("Unexpected behavior"));
+      }).catch((ex) => {
+        try {
+          expect(ex).to.be.instanceOf(HttpError);
+          expect(ex.status).to.be.eql(HttpStatusCode.InternalError);
+          done();
+        } catch (ex) {
+          done(ex);
+        }
+      });
+  });
+
+  it("return result when try getAsync given a invalid url", async () => {
+    // Arrange
+    const validResponse = { statusCode: HttpStatusCode.OK };
+    const expectedBody = "hello world";
+    requestMock.expects("get").callsFake((uri, options, callback) => {
+      callback(null, validResponse, expectedBody);
+    });
+
+    // Act
+    const body = await httpRequest.getAsync<string>(validUrl);
+
+    // Arrange
+    expect(body).to.be.exist;
+    expect(body).to.be.eql(expectedBody);
   });
 });

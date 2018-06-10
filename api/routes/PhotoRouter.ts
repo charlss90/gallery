@@ -22,7 +22,6 @@ export class PhotosRouter {
       }
 
       res.json(await this.photoService.getAllImagesAsync(filter));
-
     } catch (ex) {
       next(ex);
     }
