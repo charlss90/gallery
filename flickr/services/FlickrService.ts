@@ -3,21 +3,24 @@ import {
   IFlickrFilter,
   IFlickrResponse,
 } from "@flickr/contracts";
-import { IPagination, IPhotoPagination, IPhotoFeatures } from "@photos";
+import { IPagination, IPhotoPagination, IPhotoFeatures, FilterValidtorService } from "@photos";
 import { IRequest, ArgumentError } from "@common";
 
 export class FlickrService {
 
   private readonly baseURL: string = "https://api.flickr.com/services/rest";
 
-  constructor(private apiKey: string, private request: IRequest) {
+  constructor(
+    private apiKey: string,
+    private readonly request: IRequest,
+    private readonly filterValidatorService: FilterValidtorService) {
     if (apiKey.length === 0) {
       throw new Error("Unexpected apiKey, please specifiy");
     }
   }
 
   async getAllImagesAsync(filter: IPagination): Promise<IPhotoPagination> {
-    this.assertFilter(filter);
+    this.filterValidatorService.validate(filter);
     const response = await this.request.getAsync<IFlickrResponse>(this.baseURL, {
       qs: this.createFlickrFilter(filter),
     });
@@ -37,15 +40,6 @@ export class FlickrService {
         },
       })),
     };
-  }
-
-  private assertFilter(filter: IPagination) {
-    if (!filter.page || filter.page <= 0) {
-      throw new ArgumentError("Unexpected Argument: page must be bigger than 0");
-    }
-    if (!filter.itemsPerPage || filter.itemsPerPage <= 0) {
-      throw new ArgumentError("Unexpected Argument: itemsPerPage must be bigger than 0");
-    }
   }
 
   private createFlickrFilter(filter: IPagination): IFlickrFilter {

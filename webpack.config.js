@@ -13,6 +13,7 @@ module.exports = {
     // root: __dirname,
     alias: {
       "@webapp": path.resolve(__dirname, "webapp"),
+      "@common": path.resolve(__dirname, "common"),      
       "@photos": path.resolve(__dirname, "photos"),
       "@flickr": path.resolve(__dirname, "flickr")
     },

@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { FlickrService } from "@flickr";
 import { mock } from "sinon";
-import { IPagination } from "@photos";
+import { IPagination, FilterValidtorService } from "@photos";
 import { ArgumentError, HttpRequest, HttpError } from "@common";
 import request from "request";
 
@@ -11,13 +11,14 @@ describe("[Unit Test] FlickrService: getAllImagesAsync", () => {
   const requestMock = mock(httpRequest);
   const apiKey = "any";
   const validFilter: IPagination = { itemsPerPage: 1, page: 1 };
+  const filterValidtorService = new FilterValidtorService();
 
   before(() => {
-    photoService = new FlickrService(apiKey, httpRequest);
+    photoService = new FlickrService(apiKey, httpRequest, filterValidtorService);
   });
 
   it("throw exception when initilize given a empty api key", () => {
-    expect(() => new FlickrService("", httpRequest)).to.throw(Error);
+    expect(() => new FlickrService("", httpRequest, filterValidtorService)).to.throw(Error);
   });
 
   // tslint:disable-next-line:max-line-length

@@ -7,9 +7,13 @@ import { HttpRequest } from "@common";
 export { ApiFactory } from "@api/factories";
 export { PhotosRouter } from "@api/routes";
 import request from "request";
+import { FilterValidtorService } from "@photos";
 
 export const createFlickrApi = (apiKey: string) => {
-  const photosService = new FlickrService(apiKey, new HttpRequest(request));
+  const photosService = new FlickrService(
+    apiKey,
+    new HttpRequest(request),
+    new FilterValidtorService());
   const router = Router();
 
   new PhotosRouter(photosService).use(router);
