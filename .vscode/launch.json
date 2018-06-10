@@ -1,28 +1,57 @@
 {
-    // Utilizar IntelliSense para aprender acerca de los posibles atributos.
-    // Mantenga el puntero para ver las descripciones de los existentes atributos 
-    // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
-    "version": "0.2.0",
-    "configurations": [
-        {
-            "type": "node",
-            "request": "launch",
-            "name": "Flickr Tests",
-            "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
-            "preLaunchTask": "build-flickr",
-            "args": [
-                "-r",
-                "module-alias/register",
-                "-u",
-                "tdd",
-                "--timeout",
-                "999999",
-                "--colors",
-                "${workspaceFolder}/dist/__tests__/**/*.js",
-                "${workspaceFolder}/dist/flickr/__tests__/**/*.js",
-                "${workspaceFolder}/dist/common/__tests__/**/*.js"
-            ],
-            "internalConsoleOptions": "openOnSessionStart"
-        }
-    ]
+  // Utilizar IntelliSense para aprender acerca de los posibles atributos.
+  // Mantenga el puntero para ver las descripciones de los existentes atributos 
+  // Para más información, visite: https://go.microsoft.com/fwlink/?linkid=830387
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Run API",
+      "program": "${workspaceFolder}/dist/api/main.js",
+      "preLaunchTask": "build",
+      "args": [
+        "-r",
+        "module-alias/register",
+      ]
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "API Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "preLaunchTask": "build",
+      "args": [
+        "-r",
+        "module-alias/register",
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/dist/__tests__/**/*.js",
+        "${workspaceFolder}/dist/flickr/__tests__/**/*.js",
+        "${workspaceFolder}/dist/common/__tests__/**/*.js"
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
+    },
+    {
+      "type": "node",
+      "request": "launch",
+      "name": "Web Tests",
+      "program": "${workspaceFolder}/node_modules/mocha/bin/_mocha",
+      "preLaunchTask": "build",
+      "args": [
+        "-r",
+        "module-alias/register",
+        "-u",
+        "tdd",
+        "--timeout",
+        "999999",
+        "--colors",
+        "${workspaceFolder}/dist/webapp/__tests__/**/*.js",
+      ],
+      "internalConsoleOptions": "openOnSessionStart"
+    }
+  ]
 }

@@ -4,8 +4,8 @@
     "version": "2.0.0",
     "tasks": [
         {
-            "identifier": "build-flickr",
-            "label": "build-flickr",
+            "identifier": "build",
+            "label": "build",
             "type": "typescript",
             "tsconfig": "tsconfig.json",
             "problemMatcher": [
