@@ -1,0 +1,1 @@
+export { photoGalleryReducer } from "./PhotoGalleryReducer";
