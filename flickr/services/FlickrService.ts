@@ -3,7 +3,7 @@ import {
   IFlickrFilter,
   IFlickrResponse,
 } from "@flickr/contracts";
-import { IPagination, IPhotoPagination, IPhotoFeatures, FilterValidtorService } from "@photos";
+import { IPagination, IPhotoPagination, IPhotoFeatures, FilterValidatorService } from "@photos";
 import { IRequest, ArgumentError } from "@common";
 
 export class FlickrService {
@@ -13,7 +13,7 @@ export class FlickrService {
   constructor(
     private apiKey: string,
     private readonly request: IRequest,
-    private readonly filterValidatorService: FilterValidtorService) {
+    private readonly filterValidatorService: FilterValidatorService) {
     if (apiKey.length === 0) {
       throw new Error("Unexpected apiKey, please specifiy");
     }

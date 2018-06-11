@@ -1,2 +1,2 @@
 export { PhotoService } from "./PhotoService";
-export { FilterValidtorService } from "./FilterValidatorService";
+export { FilterValidatorService } from "./FilterValidatorService";

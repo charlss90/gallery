@@ -1,7 +1,7 @@
 import { IPagination } from "@photos";
 import { ArgumentError } from "@common";
 
-export class FilterValidtorService {
+export class FilterValidatorService {
   validate(filter: IPagination) {
     if (!filter.page || filter.page <= 0) {
       throw new ArgumentError("Unexpected Argument: page must be bigger than 0");

@@ -7,7 +7,7 @@ export class HttpError extends Error {
   }
 
   get status(): number {
-    return this.httpReponse.statusCode;
+    return this.httpReponse.statusCode || this.httpReponse.status;
   }
 
   constructor(

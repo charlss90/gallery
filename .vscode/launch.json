@@ -50,6 +50,7 @@
         "999999",
         "--colors",
         "${workspaceFolder}/dist/webapp/__tests__/**/*.js",
+        "${workspaceFolder}/dist/photos/__tests__/**/*.js",
       ],
       "internalConsoleOptions": "openOnSessionStart"
     }

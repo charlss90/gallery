@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import { FlickrService } from "@flickr";
 import { mock } from "sinon";
-import { IPagination, FilterValidtorService } from "@photos";
+import { IPagination, FilterValidatorService } from "@photos";
 import { ArgumentError, HttpRequest, HttpError } from "@common";
 import request from "request";
 
@@ -11,7 +11,7 @@ describe("[Unit Test] FlickrService: getAllImagesAsync", () => {
   const requestMock = mock(httpRequest);
   const apiKey = "any";
   const validFilter: IPagination = { itemsPerPage: 1, page: 1 };
-  const filterValidtorService = new FilterValidtorService();
+  const filterValidtorService = new FilterValidatorService();
 
   before(() => {
     photoService = new FlickrService(apiKey, httpRequest, filterValidtorService);

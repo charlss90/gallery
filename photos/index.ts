@@ -6,4 +6,4 @@ export {
   IPhotoService,
 } from "@photos/contracts";
 
-export { PhotoService, FilterValidtorService } from "@photos/services";
+export { PhotoService, FilterValidatorService } from "@photos/services";

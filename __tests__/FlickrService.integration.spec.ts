@@ -1,6 +1,6 @@
 import { expect } from "chai";
 import { FlickrService } from "@flickr";
-import { IPagination, FilterValidtorService } from "@photos";
+import { IPagination, FilterValidatorService } from "@photos";
 import { HttpRequest } from "@common";
 import request from "request";
 
@@ -12,7 +12,7 @@ describe("[Integration] FlickService: getAllImagesAsync", () => {
     flickrService = new FlickrService(
       apiKey,
       new HttpRequest(request),
-      new FilterValidtorService());
+      new FilterValidatorService());
   });
 
   it("get photos when try get images given a page 1 and 20 per page", async () => {
