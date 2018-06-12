@@ -1,14 +1,13 @@
-import { FilterValidatorService, IPhotoService, PhotoService, IPhotoPagination } from "@photos";
+import { FilterValidatorService, PhotoService, IPhotoPagination } from "@photos";
 import { PhotoGalleryActions } from "@webapp/actions/PhotoGalleryActions";
 import { IPhotoGalleryReduxService } from "@webapp/services/IPhotoGalleryReduxService";
 import { PhotoGalleryReduxService } from "@webapp/services";
 import { spy, stub } from "sinon";
 import { expect } from "chai";
+import { storeMock } from "@webapp/__tests__/Mocks";
 
 describe("[Unit Test] PhotoGalleryReduxService: loadPhotos", () => {
-  const dispatch = spy();
-
-  const photoGalleryActions = new PhotoGalleryActions(dispatch);
+  const photoGalleryActions = new PhotoGalleryActions(storeMock);
   const startFetchSpy = spy(photoGalleryActions, "startFetchPhotos");
   const successFetchSpy = spy(photoGalleryActions, "successFetchPhotos");
   const errorFetchSpy = spy(photoGalleryActions, "errorFetchPhotos");

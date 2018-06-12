@@ -4,3 +4,5 @@ export {
 export {
   PhotoGalleryReduxService,
 } from "./PhotoGalleryReduxService";
+
+export { StoreService } from "./StoreService";

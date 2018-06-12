@@ -1,9 +1,20 @@
 import { IPhotoService, IPagination, IPhotoPagination } from "@photos";
-import { HttpRequest, ArgumentError, HttpError } from "@common";
+import { HttpError } from "@common";
 import { FilterValidatorService } from "@photos/services";
 import { create, ApisauceInstance } from "apisauce";
 
 export class PhotoService implements IPhotoService {
+  private static photoService: IPhotoService;
+
+  static getSingletonInstance(): IPhotoService {
+    if (!this.photoService) {
+      this.photoService = new PhotoService(
+        "http://localhost:4000", // TODO: Pending to ENV
+        new FilterValidatorService());
+    }
+
+    return this.photoService;
+  }
 
   private readonly validURI = new RegExp(
     /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/,

@@ -1,8 +1,23 @@
-import { IPhotoService, IPagination } from "@photos";
+import { IPhotoService, IPagination, PhotoService } from "@photos";
 import { IPhotoGalleryActions } from "@webapp/actions";
 import { IPhotoGalleryReduxService } from "@webapp/services";
+import { PhotoGalleryActions } from "@webapp/actions/PhotoGalleryActions";
 
 export class PhotoGalleryReduxService implements IPhotoGalleryReduxService {
+
+  private static photoGalleryReduxSerivce: PhotoGalleryReduxService;
+
+  static getSingletonInstance(): PhotoGalleryReduxService {
+
+    if (!this.photoGalleryReduxSerivce) {
+
+      this.photoGalleryReduxSerivce = new PhotoGalleryReduxService(
+        PhotoGalleryActions.getSingletonInstance(),
+        PhotoService.getSingletonInstance());
+    }
+
+    return this.photoGalleryReduxSerivce;
+  }
 
   constructor(
     private readonly photoGalleryActions: IPhotoGalleryActions,

@@ -4,7 +4,7 @@ const initialState: PhotoGalleryState = {
   fetching: false,
   total: "0",
   totalPages: 0,
-  page: 0,
+  page: 1,
   photos: [],
 };
 
@@ -12,7 +12,7 @@ export function photoGalleryReducer(
   state: PhotoGalleryState = initialState,
   action: PhotoGalleryAction): PhotoGalleryState {
   try {
-    const { type, error, payload } = action;
+    const { type, payload } = action;
     switch (type) {
       case PhotoActionEnum.StartToFetch:
         return {

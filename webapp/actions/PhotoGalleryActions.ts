@@ -1,11 +1,24 @@
-import { Dispatch } from "redux";
+import { Store, Dispatch } from "redux";
 import { IPhotoGalleryActions } from "./IPhotoGalleryActions";
-import { PhotoActionEnum } from "@webapp/types";
+import { PhotoActionEnum, AppState } from "@webapp/types";
 import { IPhotoPagination } from "@photos";
+import { StoreService } from "@webapp/services";
 
 export class PhotoGalleryActions implements IPhotoGalleryActions {
+  private static photoGalleryActions: PhotoGalleryActions;
 
-  constructor(private readonly dispatch: Dispatch) {
+  static getSingletonInstance(): PhotoGalleryActions {
+    if (!this.photoGalleryActions) {
+      this.photoGalleryActions = new PhotoGalleryActions(StoreService.getSingletonInstance().store);
+    }
+    return this.photoGalleryActions;
+  }
+
+  constructor(private readonly store: Store<AppState>) {
+  }
+
+  private get dispatch(): Dispatch {
+    return this.store.dispatch;
   }
 
   async startFetchPhotos() {
