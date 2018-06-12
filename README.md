@@ -3,11 +3,10 @@
 - It isn't necessary to install global packages
 
 # Before to run
-Install dependency:
+Install dependencies:
 - npm i
 
 # How to run
-Web Development: 
-- npm start
-For Test:
+Run Test and Web Development: 
 - npm test
+- npm start
