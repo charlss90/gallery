@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "prestart": "tsc",
-    "start:dev:web": "webpack-dev-server",
-    "start": "node ./dist/api/main.js",
+    "start:api": "tsc && node ./dist/api/main.js",
+    "start": "webpack-dev-server",
     "pretest": "tsc",
     "test": "mocha -r module-alias/register ./dist/__tests__/**/*.js ./dist/common/__tests__/**/*.js ./dist/flickr/__tests__/**/*.js ./dist/webapp/__tests__/**/*.js ./dist/photos/__tests__/**/*.js"
   },
