@@ -1,0 +1,1 @@
+export { IPhotoGalleryActions } from "./IPhotoGalleryActions";
