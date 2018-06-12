@@ -9,7 +9,7 @@ export class PhotoService implements IPhotoService {
   static getSingletonInstance(): IPhotoService {
     if (!this.photoService) {
       this.photoService = new PhotoService(
-        "http://localhost:4000", // TODO: Pending to ENV
+        "http://localhost:8080", // TODO: Pending to ENV
         new FilterValidatorService());
     }
 

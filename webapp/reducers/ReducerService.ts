@@ -17,6 +17,9 @@ export class ReducerService {
   }
 
   static getSingletonInstance(): ReducerService {
+    if (!this.reducerService) {
+      this.reducerService = new ReducerService();
+    }
     return this.reducerService;
   }
 }

@@ -10,7 +10,7 @@ describe("[Unit Test] PhotoGalleryReducer", () => {
     total: "0",
     totalPages: 0,
     photos: [],
-    page: 0,
+    page: 1,
   };
 
   it("return initialState when call reducer given and not type and nullable state", () => {
@@ -49,7 +49,7 @@ describe("[Unit Test] PhotoGalleryReducer", () => {
       },
       id: "1",
     };
-    const page = 0;
+    const page = 1;
     const payload: IPhotoPagination = { photos: [photo, photo], total: "0", totalPages: 1 };
     const action: PhotoGalleryAction = { page, payload, type: PhotoActionEnum.FetchSuccess };
 
@@ -81,7 +81,7 @@ describe("[Unit Test] PhotoGalleryReducer", () => {
         },
         id: "1",
       };
-      const page = 0;
+      const page = 1;
       const payload: IPhotoPagination = { photos: [photo, photo], total: "0", totalPages: 2 };
       const action: PhotoGalleryAction = { page, payload, type: PhotoActionEnum.FetchSuccess };
 

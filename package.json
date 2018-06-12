@@ -8,7 +8,7 @@
     "start:dev:web": "webpack-dev-server",
     "start": "node ./dist/api/main.js",
     "pretest": "tsc",
-    "test": "mocha -r module-alias/register ./dist/__tests__/**/*.js ./dist/common/__tests__/**/*.js ./dist/flickr/__tests__/**/*.js"
+    "test": "mocha -r module-alias/register ./dist/__tests__/**/*.js ./dist/common/__tests__/**/*.js ./dist/flickr/__tests__/**/*.js ./dist/webapp/__tests__/**/*.js ./dist/photos/__tests__/**/*.js"
   },
   "_moduleAliases": {
     "@webapp": "./dist/webapp",

@@ -1,6 +1,6 @@
 import "es6-shim";
 import * as React from "react";
 import * as ReactDOM from "react-dom";
-import { Hello } from "@webapp/components";
+import { App } from "@webapp/screens/App";
 
-ReactDOM.render(<Hello message="Hello World" />, document.getElementById("app"));
+ReactDOM.render(<App />, document.getElementById("app"));

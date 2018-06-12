@@ -1,6 +1,7 @@
+require("module-alias/register");
 const path = require("path");
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const npmPackage = require("./package.json");
+const { injectFlickr } = require("./dist/api");
 
 module.exports = {
   entry: "./webapp/common/bootstrap.tsx",
@@ -9,15 +10,19 @@ module.exports = {
     path: path.join(__dirname, "dist"),
   },
   devtool: "source-map",
+  devServer: {
+    before: function (app) {
+      injectFlickr("59e9561e02d8a39f946bc73f01d4d6d1", app);
+    }
+  },
   resolve: {
     // root: __dirname,
     alias: {
       "@webapp": path.resolve(__dirname, "webapp"),
-      "@common": path.resolve(__dirname, "common"),      
+      "@common": path.resolve(__dirname, "common"),
       "@photos": path.resolve(__dirname, "photos"),
       "@flickr": path.resolve(__dirname, "flickr")
     },
-    // modules: npmPackage._moduleDirectories || [],
     extensions: [".ts", ".tsx", ".js", ".json"],
   },
   module: {
