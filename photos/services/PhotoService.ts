@@ -5,12 +5,22 @@ import { create, ApisauceInstance } from "apisauce";
 
 export class PhotoService implements IPhotoService {
 
+  private readonly validURI = new RegExp(
+    /^(?:\w+:)?\/\/([^\s\.]+\.\S{2}|localhost[\:?\d]*)\S*$/,
+    "i");
   private api: ApisauceInstance;
 
   constructor(
-    private readonly apiURL: URL,
+    private readonly apiURL: string,
     private readonly filterValidator: FilterValidatorService) {
-    this.api = create({ baseURL: apiURL.origin });
+    this.assertURI(this.apiURL);
+    this.api = create({ baseURL: apiURL });
+  }
+
+  private assertURI(uri: string) {
+    if (!this.validURI.test(uri)) {
+      throw new TypeError("Invalid URI");
+    }
   }
 
   async getAllImagesAsync(filter: IPagination): Promise<IPhotoPagination> {

@@ -1,10 +1,10 @@
-import { IAction, PhotoGalleryAction, PhotoGalleryState, PhotoActionEnum } from "@webapp/types";
-import { IPhotoPagination, IPhoto } from "@photos";
+import { PhotoGalleryAction, PhotoGalleryState, PhotoActionEnum } from "@webapp/types";
 
 const initialState: PhotoGalleryState = {
   fetching: false,
   total: "0",
   totalPages: 0,
+  page: 0,
   photos: [],
 };
 
@@ -21,7 +21,7 @@ export function photoGalleryReducer(
         };
 
       case PhotoActionEnum.FetchSuccess:
-        let { photos, total, totalPages } = state;
+        let { photos, total, totalPages, page } = state;
 
         if (payload) {
           if (payload.photos && payload.photos.length > 0) {
@@ -34,11 +34,13 @@ export function photoGalleryReducer(
             totalPages = payload.totalPages;
           }
         }
+        page += 1;
 
         return {
           photos,
           totalPages,
           total,
+          page,
           fetching: false,
         };
 

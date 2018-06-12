@@ -2,11 +2,11 @@ import { IPhotoService, PhotoService, FilterValidatorService, IPhotoPagination }
 import { HttpStatusCode, HttpError, ArgumentError } from "@common";
 import { expect } from "chai";
 import nock from "nock";
-import { spy, mock } from "sinon";
+import { spy } from "sinon";
 
 describe("[Unit Test] PhotoService: getAllImagesAsync", () => {
   let photoService: IPhotoService;
-  const apiURL = new URL("http://localhost:3000");
+  const apiURL = "http://localhost:3000";
 
   const queryParamsForInternalError = { itemsPerPage: 1, page: 1 };
   const queryParamsForValidResponse = { itemsPerPage: 2, page: 2 };
@@ -15,7 +15,7 @@ describe("[Unit Test] PhotoService: getAllImagesAsync", () => {
 
   const validResponse: IPhotoPagination = { photos: [], total: "0", totalPages: 0 };
 
-  const nockApi = nock(apiURL.origin);
+  const nockApi = nock(apiURL);
 
   before(() => {
     photoService = new PhotoService(apiURL, filterValidatorService);
@@ -27,6 +27,10 @@ describe("[Unit Test] PhotoService: getAllImagesAsync", () => {
     nockApi.get("/photos")
       .query(queryParamsForValidResponse)
       .reply(200, validResponse);
+  });
+
+  it("throw TypeError when try initialize given a invalid uri", () => {
+    expect(() => new PhotoService("adfa", filterValidatorService)).throw(TypeError);
   });
 
   it("throw error when try getAllImages given a invalid page param", (done) => {
@@ -62,7 +66,8 @@ describe("[Unit Test] PhotoService: getAllImagesAsync", () => {
         done(new Error("Unexpected behavior"));
       }).catch((ex) => {
         try {
-          // expect(validateSpy.called).to.be.true;
+          expect(validateSpy.called).to.be.true;
+          expect(validateSpy.calledWith(invalidFilter)).to.be.true;
           expect(ex).to.be.exist;
           expect(ex).to.be.instanceOf(ArgumentError);
           done();

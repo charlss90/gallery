@@ -5,4 +5,5 @@ export interface PhotoGalleryState {
   totalPages: number;
   total: string;
   photos: IPhoto[];
+  page: number;
 }
