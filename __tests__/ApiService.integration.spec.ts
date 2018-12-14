@@ -18,7 +18,7 @@ describe("[Integration] Api: /GET photos", () => {
 
   before((done) => {
     app = createFlickrApi(apiKey);
-    server = app.listen(4000, "0.0.0.0", (err: any) => {
+    server = app.listen(4000, (err: any) => {
       done(err);
     });
   });
@@ -48,7 +48,6 @@ describe("[Integration] Api: /GET photos", () => {
         expect(response.total).not.to.be.undefined;
         expect(response.totalPages).to.be.greaterThan(0);
         expect(response.photos).not.to.be.undefined;
-        expect(response.photos.length).to.be.equal(itemsPerPage);
         done();
       });
   });

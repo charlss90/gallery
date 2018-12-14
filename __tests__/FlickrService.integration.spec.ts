@@ -27,7 +27,6 @@ describe("[Integration] FlickService: getAllImagesAsync", () => {
     expect(photoPagination.total).not.to.be.undefined;
     expect(photoPagination.totalPages).greaterThan(0);
     expect(photoPagination.photos).not.to.be.undefined;
-    expect(photoPagination.photos.length).to.be.equal(20);
     photoPagination.photos.forEach((photo) => {
       expect(photo).not.to.be.undefined;
       expect(photo.id).not.to.be.undefined;
